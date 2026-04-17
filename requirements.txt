@@ -1,7 +1,1 @@
-# No external dependencies needed
-# All libraries used are Python standard library:
-# - http.server (BaseHTTPRequestHandler)
-# - json
-# - urllib.request
-# - urllib.error
-# - os
+﻿anthropic
