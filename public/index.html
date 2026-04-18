@@ -663,9 +663,9 @@
     document.getElementById('audit-result').style.display = 'none';
 
     try {
-      const res = await fetch('/api/audit', {
+      const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer YOUR_OPENROUTER_KEY' },
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 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' },
         body: JSON.stringify({ hashtags })
       });
 
