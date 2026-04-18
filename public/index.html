@@ -29,10 +29,10 @@
     }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg3); color: var(--text); min-height: 100vh; font-size: 15px; line-height: 1.6; }
     header { background: var(--bg); border-bottom: 0.5px solid var(--border2); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; position: sticky; top: 0; z-index: 10; }
-    .logo { font-size: 16px; font-weight: 500; letter-spacing: -0.3px; display: flex; align-items: center; gap: 8px; }
+    .logo { font-size: 16px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
     .logo-icon { width: 28px; height: 28px; background: var(--text); border-radius: 7px; display: flex; align-items: center; justify-content: center; color: var(--bg); font-size: 14px; }
     .nav-links { display: flex; gap: 4px; }
-    .nav-btn { padding: 6px 14px; border: none; background: transparent; color: var(--text2); font-size: 14px; border-radius: 8px; cursor: pointer; transition: background 0.15s, color 0.15s; font-family: inherit; }
+    .nav-btn { padding: 6px 14px; border: none; background: transparent; color: var(--text2); font-size: 14px; border-radius: 8px; cursor: pointer; font-family: inherit; }
     .nav-btn:hover { background: var(--bg2); color: var(--text); }
     .nav-btn.active { background: var(--bg2); color: var(--text); font-weight: 500; }
     main { max-width: 780px; margin: 2.5rem auto; padding: 0 1.5rem; }
@@ -40,25 +40,22 @@
     .page.active { display: block; }
     .card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1rem; }
     label { display: block; font-size: 13px; color: var(--text2); margin-bottom: 5px; }
-    textarea, select, input[type="text"] { width: 100%; padding: 10px 12px; border: 0.5px solid var(--border2); border-radius: var(--radius); font-size: 14px; font-family: inherit; background: var(--bg); color: var(--text); transition: border-color 0.15s; resize: vertical; }
-    textarea:focus, select:focus, input:focus { outline: none; border-color: var(--text2); }
+    textarea, select, input[type="text"] { width: 100%; padding: 10px 12px; border: 0.5px solid var(--border2); border-radius: var(--radius); font-size: 14px; font-family: inherit; background: var(--bg); color: var(--text); resize: vertical; }
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
     @media (max-width: 560px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
     .field { margin-bottom: 1rem; }
-    .field:last-child { margin-bottom: 0; }
-    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; border: 0.5px solid var(--border2); border-radius: var(--radius); background: transparent; color: var(--text); font-size: 14px; font-family: inherit; cursor: pointer; transition: background 0.15s, opacity 0.15s; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; border: 0.5px solid var(--border2); border-radius: var(--radius); background: transparent; color: var(--text); font-size: 14px; font-family: inherit; cursor: pointer; }
     .btn:hover { background: var(--bg2); }
     .btn:disabled { opacity: 0.45; cursor: not-allowed; }
     .btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
-    .btn-primary:hover { opacity: 0.85; background: var(--text); }
     .btn-sm { padding: 6px 14px; font-size: 13px; }
     .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 1.25rem; }
     .stat { background: var(--bg2); border-radius: var(--radius); padding: 12px 14px; }
     .stat-label { font-size: 12px; color: var(--text2); margin-bottom: 3px; }
     .stat-value { font-size: 20px; font-weight: 500; }
     .tags-area { margin: 1rem 0; min-height: 60px; }
-    .tag { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 999px; font-size: 13px; font-weight: 500; margin: 3px; border: 0.5px solid transparent; }
+    .tag { display: inline-flex; padding: 4px 10px; border-radius: 999px; font-size: 13px; font-weight: 500; margin: 3px; border: 0.5px solid transparent; }
     .tag-brand { background: var(--brand-bg); color: var(--brand-text); border-color: var(--brand-border); }
     .tag-high { background: var(--high-bg); color: var(--high-text); border-color: var(--high-border); }
     .tag-mid { background: var(--mid-bg); color: var(--mid-text); border-color: var(--mid-border); }
@@ -75,37 +72,31 @@
     .dot:nth-child(3) { animation-delay: 0.4s; }
     @keyframes pulse { 0%,80%,100%{opacity:0.2} 40%{opacity:1} }
     .error-box { background: #fcebeb; color: #a32d2d; border: 0.5px solid #f09595; border-radius: var(--radius); padding: 10px 14px; font-size: 13px; margin-top: 8px; display: none; }
+    .hero { text-align: center; padding: 1rem 0 2rem; }
+    .hero h1 { font-size: 28px; font-weight: 500; margin-bottom: 8px; }
+    .hero p { font-size: 15px; color: var(--text2); }
     .section-title { font-size: 16px; font-weight: 500; margin-bottom: 0.75rem; }
-    .strategy-row { border-bottom: 0.5px solid var(--border); padding: 12px 0; font-size: 13px; line-height: 1.8; }
+    .strategy-row { border-bottom: 0.5px solid var(--border); padding: 12px 0; font-size: 13px; }
     .strategy-row:last-child { border-bottom: none; }
-    .strategy-platform { font-weight: 500; font-size: 13px; margin-bottom: 2px; }
+    .strategy-platform { font-weight: 500; margin-bottom: 2px; }
     .audit-score { font-size: 48px; font-weight: 500; line-height: 1; margin-bottom: 4px; }
     .score-label { font-size: 13px; color: var(--text2); }
     .flag { display: inline-block; background: var(--high-bg); color: var(--high-text); border: 0.5px solid var(--high-border); border-radius: 6px; padding: 3px 10px; font-size: 12px; margin: 2px; }
     .win { display: inline-block; background: var(--niche-bg); color: var(--niche-text); border: 0.5px solid var(--niche-border); border-radius: 6px; padding: 3px 10px; font-size: 12px; margin: 2px; }
-    .hero { text-align: center; padding: 1rem 0 2rem; }
-    .hero h1 { font-size: 28px; font-weight: 500; letter-spacing: -0.5px; margin-bottom: 8px; }
-    .hero p { font-size: 15px; color: var(--text2); }
     .toast { position: fixed; bottom: 24px; right: 24px; background: var(--text); color: var(--bg); padding: 10px 18px; border-radius: var(--radius); font-size: 13px; opacity: 0; transform: translateY(8px); transition: opacity 0.2s, transform 0.2s; pointer-events: none; z-index: 100; }
     .toast.show { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
-
 <header>
-  <div class="logo">
-    <div class="logo-icon">#</div>
-    Hashtag Strategy Engine
-  </div>
+  <div class="logo"><div class="logo-icon">#</div>Hashtag Strategy Engine</div>
   <nav class="nav-links">
     <button class="nav-btn active" onclick="showPage('generate', this)">Generate</button>
     <button class="nav-btn" onclick="showPage('strategy', this)">Strategy</button>
     <button class="nav-btn" onclick="showPage('audit', this)">Audit</button>
   </nav>
 </header>
-
 <main>
-  <!-- GENERATE PAGE -->
   <div class="page active" id="page-generate">
     <div class="hero">
       <h1>Generate hashtag strategy</h1>
@@ -192,56 +183,32 @@
     </div>
   </div>
 
-  <!-- STRATEGY PAGE -->
   <div class="page" id="page-strategy">
-    <div class="hero">
-      <h1>Platform strategy guide</h1>
-      <p>Placement rules, tier framework, and best practices per platform.</p>
-    </div>
+    <div class="hero"><h1>Platform strategy guide</h1><p>Placement rules and best practices per platform.</p></div>
     <div class="card">
       <div class="section-title">The 4-tier framework</div>
-      <div class="strategy-row">
-        <span class="tag tag-brand">#YourBrand</span>
-        <span style="font-weight:500"> Branded (1-3 per post)</span><br>
-        Unique to you. Builds community identity, tracks UGC, and protects your content space.
-      </div>
-      <div class="strategy-row">
-        <span class="tag tag-high">#Fitness</span>
-        <span style="font-weight:500"> High-volume 1M+ (2-3 per post)</span><br>
-        Broad reach, high competition. Use for algorithmic signal.
-      </div>
-      <div class="strategy-row">
-        <span class="tag tag-mid">#HomeWorkout2024</span>
-        <span style="font-weight:500"> Mid-tier 50K-1M (5-8 per post)</span><br>
-        Your primary growth engine. Real engagement with real audiences.
-      </div>
-      <div class="strategy-row">
-        <span class="tag tag-niche">#KettlebellMoms</span>
-        <span style="font-weight:500"> Niche under 50K (3-5 per post)</span><br>
-        Hyper-targeted, high quality audience. Lower competition means you rank longer.
-      </div>
+      <div class="strategy-row"><span class="tag tag-brand">#YourBrand</span> <strong>Branded (1-3 per post)</strong><br>Unique to you. Builds community identity.</div>
+      <div class="strategy-row"><span class="tag tag-high">#Fitness</span> <strong>High-volume 1M+ (2-3 per post)</strong><br>Broad reach, high competition.</div>
+      <div class="strategy-row"><span class="tag tag-mid">#HomeWorkout</span> <strong>Mid-tier 50K-1M (5-8 per post)</strong><br>Your primary growth engine.</div>
+      <div class="strategy-row"><span class="tag tag-niche">#KettlebellMoms</span> <strong>Niche under 50K (3-5 per post)</strong><br>Hyper-targeted, high quality audience.</div>
     </div>
     <div class="card">
       <div class="section-title">Platform placement rules</div>
-      <div class="strategy-row"><div class="strategy-platform">Instagram</div>20-30 tags. First comment preferred. Mix all 4 tiers.</div>
-      <div class="strategy-row"><div class="strategy-platform">TikTok</div>3-6 tags in caption. Trending + 1 niche.</div>
-      <div class="strategy-row"><div class="strategy-platform">YouTube Shorts</div>3-5 tags in description. Focus on topic keywords.</div>
-      <div class="strategy-row"><div class="strategy-platform">LinkedIn</div>3-5 tags. End of post only. Professional niche tags.</div>
-      <div class="strategy-row"><div class="strategy-platform">X / Twitter</div>1-2 tags max. Trending only.</div>
-      <div class="strategy-row"><div class="strategy-platform">Facebook</div>2-3 tags. Minimal. Broad reach only.</div>
+      <div class="strategy-row"><div class="strategy-platform">Instagram</div>20-30 tags. First comment preferred.</div>
+      <div class="strategy-row"><div class="strategy-platform">TikTok</div>3-6 tags in caption.</div>
+      <div class="strategy-row"><div class="strategy-platform">YouTube Shorts</div>3-5 tags in description.</div>
+      <div class="strategy-row"><div class="strategy-platform">LinkedIn</div>3-5 tags. End of post only.</div>
+      <div class="strategy-row"><div class="strategy-platform">X / Twitter</div>1-2 tags max.</div>
+      <div class="strategy-row"><div class="strategy-platform">Facebook</div>2-3 tags. Minimal.</div>
     </div>
   </div>
 
-  <!-- AUDIT PAGE -->
   <div class="page" id="page-audit">
-    <div class="hero">
-      <h1>Audit your hashtags</h1>
-      <p>Paste your current hashtag set and get a quality score with actionable fixes.</p>
-    </div>
+    <div class="hero"><h1>Audit your hashtags</h1><p>Paste your current hashtag set and get a quality score.</p></div>
     <div class="card">
       <div class="field">
         <label>Your current hashtags</label>
-        <textarea id="audit-input" rows="4" placeholder="#fitness #workout #gym #motivation ..."></textarea>
+        <textarea id="audit-input" rows="4" placeholder="#fitness #workout #gym ..."></textarea>
       </div>
       <div style="display:flex; align-items:center; gap:12px;">
         <button class="btn btn-primary" id="audit-btn" onclick="auditHashtags()">Audit hashtags</button>
@@ -254,22 +221,11 @@
     </div>
     <div class="card" id="audit-result" style="display:none">
       <div style="display:flex; align-items:flex-start; gap:2rem; margin-bottom:1.5rem;">
-        <div>
-          <div class="audit-score" id="audit-score">-</div>
-          <div class="score-label">out of 10</div>
-        </div>
-        <div style="flex:1">
-          <div class="notes-box" id="audit-summary"></div>
-        </div>
+        <div><div class="audit-score" id="audit-score">-</div><div class="score-label">out of 10</div></div>
+        <div style="flex:1"><div class="notes-box" id="audit-summary"></div></div>
       </div>
-      <div class="field">
-        <label style="margin-bottom:8px">Risk flags</label>
-        <div id="audit-flags"></div>
-      </div>
-      <div class="field">
-        <label style="margin-bottom:8px">Suggestions</label>
-        <div id="audit-wins"></div>
-      </div>
+      <div class="field"><label style="margin-bottom:8px">Remove these</label><div id="audit-flags"></div></div>
+      <div class="field"><label style="margin-bottom:8px">Add these instead</label><div id="audit-wins"></div></div>
     </div>
   </div>
 </main>
@@ -277,43 +233,66 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  const OPENROUTER_KEY = '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';
-  const API_URL = 'https://openrouter.ai/api/v1/chat/completions';
-  const MODELS = [
-  'mistralai/mistral-7b-instruct:free',
-  'google/gemma-3-4b-it:free',
-  'meta-llama/llama-3.3-70b-instruct:free',
-  'qwen/qwen-2.5-7b-instruct:free'
-];
+  var OPENROUTER_KEY = 'PASTE_YOUR_KEY_HERE';
+  var API_URL = 'https://openrouter.ai/api/v1/chat/completions';
+  var MODELS = [
+    'mistralai/mistral-7b-instruct:free',
+    'google/gemma-3-4b-it:free',
+    'meta-llama/llama-3.3-70b-instruct:free',
+    'qwen/qwen-2.5-7b-instruct:free'
+  ];
 
-  let generatedTags = [];
+  var generatedTags = [];
 
   function showPage(name, btn) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+    document.querySelectorAll('.nav-btn').forEach(function(b) { b.classList.remove('active'); });
     document.getElementById('page-' + name).classList.add('active');
     btn.classList.add('active');
   }
 
   function showToast(msg) {
-    const t = document.getElementById('toast');
+    var t = document.getElementById('toast');
     t.textContent = msg;
     t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2000);
+    setTimeout(function() { t.classList.remove('show'); }, 2000);
+  }
+
+  async function callAI(prompt) {
+    var lastError = '';
+    for (var i = 0; i < MODELS.length; i++) {
+      try {
+        var response = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + OPENROUTER_KEY },
+          body: JSON.stringify({ model: MODELS[i], messages: [{ role: 'user', content: prompt }] })
+        });
+        var json = await response.json();
+        if (json.choices && json.choices[0] && json.choices[0].message) {
+          var text = json.choices[0].message.content;
+          text = text.replace(/```json/g, '').replace(/```/g, '').trim();
+          return JSON.parse(text);
+        }
+        lastError = JSON.stringify(json);
+      } catch(e) {
+        lastError = e.message;
+      }
+    }
+    throw new Error('All models failed: ' + lastError);
   }
 
   async function generateHashtags() {
-    const script = document.getElementById('script').value.trim();
+    var script = document.getElementById('script').value.trim();
     if (!script) { alert('Please enter your video script.'); return; }
 
-    const platform = document.getElementById('platform').value;
-    const niche = document.getElementById('niche').value || 'general';
-    const goal = document.getElementById('goal').value;
-    const tone = document.getElementById('tone').value;
+    var platform = document.getElementById('platform').value;
+    var niche = document.getElementById('niche').value || 'general';
+    var goal = document.getElementById('goal').value;
+    var tone = document.getElementById('tone').value;
 
-    const btn = document.getElementById('gen-btn');
-    const loader = document.getElementById('gen-loader');
-    const errBox = document.getElementById('gen-error');
+    var btn = document.getElementById('gen-btn');
+    var loader = document.getElementById('gen-loader');
+    var errBox = document.getElementById('gen-error');
 
     btn.disabled = true;
     loader.classList.add('show');
@@ -321,52 +300,28 @@
     document.getElementById('result-card').style.display = 'none';
 
     try {
-      const prompt = 'You are a hashtag strategy expert. Generate hashtags for ' + platform + '. Niche: ' + niche + '. Goal: ' + goal + '. Tone: ' + tone + '. Script: ' + script + '. Return ONLY a valid JSON object with these exact keys: branded (array of 2 hashtags), high_volume (array of 3 hashtags), mid_tier (array of 5 hashtags), niche (array of 5 hashtags), strategy_notes (string). No extra text, just JSON.';
+      var prompt = 'You are a hashtag strategy expert. Generate hashtags for ' + platform + '. Niche: ' + niche + '. Goal: ' + goal + '. Tone: ' + tone + '. Script: ' + script + '. Return ONLY a valid JSON object with these exact keys: branded (array of 2 hashtags), high_volume (array of 3 hashtags), mid_tier (array of 5 hashtags), niche (array of 5 hashtags), strategy_notes (string). No extra text, just JSON.';
+      var data = await callAI(prompt);
 
-      let apiData = null;
-for (const model of MODELS) {
-  const res = await fetch(API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + OPENROUTER_KEY
-    },
-    body: JSON.stringify({
-      model: model,
-      messages: [{ role: 'user', content: prompt }]
-    })
-  });
-  apiData = await res.json();
-  if (apiData.choices) break;
-}
-if (!apiData || !apiData.choices) throw new Error(JSON.stringify(apiData));
-
-      const apiData = await res.json();
-      if (!apiData.choices) throw new Error(JSON.stringify(apiData));
-
-      let text = apiData.choices[0].message.content;
-      text = text.replace(/```json/g, '').replace(/```/g, '').trim();
-      const data = JSON.parse(text);
-
-      generatedTags = [
-        ...(data.branded || []).map(t => ({ tag: t, type: 'brand' })),
-        ...(data.high_volume || []).map(t => ({ tag: t, type: 'high' })),
-        ...(data.mid_tier || []).map(t => ({ tag: t, type: 'mid' })),
-        ...(data.niche || []).map(t => ({ tag: t, type: 'niche' })),
-      ];
+      generatedTags = [];
+      (data.branded || []).forEach(function(t) { generatedTags.push({ tag: t, type: 'brand' }); });
+      (data.high_volume || []).forEach(function(t) { generatedTags.push({ tag: t, type: 'high' }); });
+      (data.mid_tier || []).forEach(function(t) { generatedTags.push({ tag: t, type: 'mid' }); });
+      (data.niche || []).forEach(function(t) { generatedTags.push({ tag: t, type: 'niche' }); });
 
       document.getElementById('stats').innerHTML =
         '<div class="stat"><div class="stat-label">Total hashtags</div><div class="stat-value">' + generatedTags.length + '</div></div>' +
         '<div class="stat"><div class="stat-label">Platform</div><div class="stat-value">' + platform + '</div></div>' +
         '<div class="stat"><div class="stat-label">Goal</div><div class="stat-value">' + goal + '</div></div>';
 
-      document.getElementById('tags-area').innerHTML =
-        generatedTags.map(function(item) { return '<span class="tag tag-' + item.type + '">' + item.tag + '</span>'; }).join('');
+      document.getElementById('tags-area').innerHTML = generatedTags.map(function(item) {
+        return '<span class="tag tag-' + item.type + '">' + item.tag + '</span>';
+      }).join('');
 
       document.getElementById('strategy-notes').textContent = data.strategy_notes || '';
       document.getElementById('result-card').style.display = 'block';
 
-    } catch (e) {
+    } catch(e) {
       errBox.textContent = 'Error: ' + e.message;
       errBox.style.display = 'block';
     }
@@ -376,20 +331,20 @@ if (!apiData || !apiData.choices) throw new Error(JSON.stringify(apiData));
   }
 
   function copyTags(mode) {
-    const tags = generatedTags.map(function(t) { return t.tag; }).join(' ');
-    let text = tags;
+    var tags = generatedTags.map(function(t) { return t.tag; }).join(' ');
+    var text = tags;
     if (mode === 'comment') text = '.\n.\n.\n' + tags;
     if (mode === 'clean') text = generatedTags.map(function(t) { return t.tag; }).join('\n');
     navigator.clipboard.writeText(text).then(function() { showToast('Copied to clipboard'); });
   }
 
   async function auditHashtags() {
-    const hashtags = document.getElementById('audit-input').value.trim();
+    var hashtags = document.getElementById('audit-input').value.trim();
     if (!hashtags) { alert('Please paste your hashtags.'); return; }
 
-    const btn = document.getElementById('audit-btn');
-    const loader = document.getElementById('audit-loader');
-    const errBox = document.getElementById('audit-error');
+    var btn = document.getElementById('audit-btn');
+    var loader = document.getElementById('audit-loader');
+    var errBox = document.getElementById('audit-error');
 
     btn.disabled = true;
     loader.classList.add('show');
@@ -397,41 +352,25 @@ if (!apiData || !apiData.choices) throw new Error(JSON.stringify(apiData));
     document.getElementById('audit-result').style.display = 'none';
 
     try {
-      const prompt = 'You are a hashtag audit expert. Analyze these hashtags: ' + hashtags + '. Return ONLY a valid JSON object with these exact keys: score (number 1-10), issues (array of strings), good (array of hashtag strings), remove (array of hashtag strings), suggestions (array of new hashtag strings). No extra text, just JSON.';
-
-      const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + OPENROUTER_KEY
-        },
-        body: JSON.stringify({
-          model: MODEL,
-          messages: [{ role: 'user', content: prompt }]
-        })
-      });
-
-      const apiData = await res.json();
-      if (!apiData.choices) throw new Error(JSON.stringify(apiData));
-
-      let text = apiData.choices[0].message.content;
-      text = text.replace(/```json/g, '').replace(/```/g, '').trim();
-      const data = JSON.parse(text);
+      var prompt = 'You are a hashtag audit expert. Analyze these hashtags: ' + hashtags + '. Return ONLY a valid JSON object with these exact keys: score (number 1-10), issues (array of strings), good (array of hashtag strings), remove (array of hashtag strings), suggestions (array of new hashtag strings). No extra text, just JSON.';
+      var data = await callAI(prompt);
 
       document.getElementById('audit-score').textContent = data.score || '?';
       document.getElementById('audit-summary').textContent = (data.issues || []).join('. ');
 
-      const flags = data.remove || [];
-      document.getElementById('audit-flags').innerHTML =
-        flags.length ? flags.map(function(f) { return '<span class="flag">' + f + '</span>'; }).join('') : '<span style="font-size:13px;color:var(--text2)">No major flags detected</span>';
+      var flags = data.remove || [];
+      document.getElementById('audit-flags').innerHTML = flags.length
+        ? flags.map(function(f) { return '<span class="flag">' + f + '</span>'; }).join('')
+        : '<span style="font-size:13px;color:var(--text2)">No major flags detected</span>';
 
-      const wins = data.suggestions || [];
-      document.getElementById('audit-wins').innerHTML =
-        wins.map(function(w) { return '<span class="win">' + w + '</span>'; }).join('');
+      var wins = data.suggestions || [];
+      document.getElementById('audit-wins').innerHTML = wins.map(function(w) {
+        return '<span class="win">' + w + '</span>';
+      }).join('');
 
       document.getElementById('audit-result').style.display = 'block';
 
-    } catch (e) {
+    } catch(e) {
       errBox.textContent = 'Error: ' + e.message;
       errBox.style.display = 'block';
     }
