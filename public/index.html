@@ -279,7 +279,12 @@
 <script>
   const OPENROUTER_KEY = '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';
   const API_URL = 'https://openrouter.ai/api/v1/chat/completions';
-  const MODEL = 'meta-llama/llama-3.3-70b-instruct:free';
+  const MODELS = [
+  'mistralai/mistral-7b-instruct:free',
+  'google/gemma-3-4b-it:free',
+  'meta-llama/llama-3.3-70b-instruct:free',
+  'qwen/qwen-2.5-7b-instruct:free'
+];
 
   let generatedTags = [];
 
@@ -318,17 +323,23 @@
     try {
       const prompt = 'You are a hashtag strategy expert. Generate hashtags for ' + platform + '. Niche: ' + niche + '. Goal: ' + goal + '. Tone: ' + tone + '. Script: ' + script + '. Return ONLY a valid JSON object with these exact keys: branded (array of 2 hashtags), high_volume (array of 3 hashtags), mid_tier (array of 5 hashtags), niche (array of 5 hashtags), strategy_notes (string). No extra text, just JSON.';
 
-      const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + OPENROUTER_KEY
-        },
-        body: JSON.stringify({
-          model: MODEL,
-          messages: [{ role: 'user', content: prompt }]
-        })
-      });
+      let apiData = null;
+for (const model of MODELS) {
+  const res = await fetch(API_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + OPENROUTER_KEY
+    },
+    body: JSON.stringify({
+      model: model,
+      messages: [{ role: 'user', content: prompt }]
+    })
+  });
+  apiData = await res.json();
+  if (apiData.choices) break;
+}
+if (!apiData || !apiData.choices) throw new Error(JSON.stringify(apiData));
 
       const apiData = await res.json();
       if (!apiData.choices) throw new Error(JSON.stringify(apiData));
