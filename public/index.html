@@ -596,7 +596,7 @@
     document.getElementById('result-card').style.display = 'none';
 
     try {
-      const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      const res = await fetch('/api/generate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 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
 ' },
