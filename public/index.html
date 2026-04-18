@@ -596,10 +596,11 @@
     document.getElementById('result-card').style.display = 'none';
 
     try {
-      const res = await fetch('/api/generate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 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
+' },
+      body: JSON.stringify({ model: 'meta-llama/llama-3.3-70b-instruct:free', messages: [{ role: 'user', content: `Generate hashtags for ${document.getElementById('platform').value} script: ${document.getElementById('script').value}. Return JSON with keys: branded, high_volume, mid_tier, niche, strategy_notes` }],
           script,
           platform: document.getElementById('platform').value,
           niche: document.getElementById('niche').value || 'general',
