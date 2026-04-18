@@ -21,7 +21,7 @@ class handler(BaseHTTPRequestHandler):
                 raise Exception("GEMINI_API_KEY not set")
             prompt = f"You are a hashtag expert. Analyze this video script and generate hashtags for {platform}. Niche: {niche}. Goal: {goal}. Script: {script}. Return ONLY valid JSON with these keys: branded, high_volume, mid_tier, niche, strategy_notes"
             data = json.dumps({"contents": [{"parts": [{"text": prompt}]}]}).encode()
-            req = urllib.request.Request(f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}", data=data, headers={"Content-Type": "application/json"}, method="POST")
+            req = urllib.request.Request(f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}", data=data, headers={"Content-Type": "application/json"}, method="POST")
             with urllib.request.urlopen(req) as res:
                 result = json.loads(res.read())
                 text = result["candidates"][0]["content"]["parts"][0]["text"]
