@@ -1,9 +1,4 @@
 {
-  "functions": {
-    "api-js/*.js": {
-      "runtime": "edge"
-    }
-  },
   "rewrites": [
     { "source": "/api/generate", "destination": "/api-js/generate.js" },
     { "source": "/api/audit", "destination": "/api-js/audit.js" },
