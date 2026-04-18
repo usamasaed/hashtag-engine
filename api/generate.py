@@ -1,116 +1,65 @@
-from http.server import BaseHTTPRequestHandler
 import json
+import os
 import urllib.request
 import urllib.error
-import os
 
-
-class handler(BaseHTTPRequestHandler):
-
-    def do_OPTIONS(self):
-        self.send_response(200)
-        self._set_cors_headers()
-        self.end_headers()
-
-    def do_POST(self):
-        try:
-            content_length = int(self.headers.get("Content-Length", 0))
-            body = self.rfile.read(content_length)
-            data = json.loads(body)
-
-            script = data.get("script", "").strip()
-            platform = data.get("platform", "instagram")
-            niche = data.get("niche", "general")
-            audience = data.get("audience", "growth")
-            tone = data.get("tone", "educational")
-            stage = data.get("stage", "growing")
-
-            if not script:
-                self._send_json({"error": "Script is required"}, 400)
-                return
-
-            api_key = os.environ.get("ANTHROPIC_API_KEY", "")
-            if not api_key:
-                self._send_json({"error": "ANTHROPIC_API_KEY not configured"}, 500)
-                return
-
-            prompt = f"""You are a professional hashtag strategist. Analyze this video script/content and generate an optimal hashtag strategy.
+def handler(request):
+    if request.method == "OPTIONS":
+        return Response("", headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type"
+        })
+    
+    try:
+        body = json.loads(request.body)
+        script = body.get("script", "")
+        platform = body.get("platform", "Instagram")
+        niche = body.get("niche", "")
+        goal = body.get("goal", "")
+        
+        api_key = os.environ.get("GEMINI_API_KEY")
+        
+        prompt = f"""You are a hashtag strategy expert. Analyze this video script and generate hashtags.
 
 Platform: {platform}
 Niche: {niche}
-Goal: {audience}
-Tone: {tone}
-Account stage: {stage}
+Goal: {goal}
+Script: {script}
 
-Content:
-\"\"\"
-{script}
-\"\"\"
-
-Respond ONLY in valid JSON (no markdown, no backticks, no extra text):
+Return ONLY a JSON object like this:
 {{
-  "branded": ["hashtag1","hashtag2"],
-  "high_volume": ["hashtag1","hashtag2","hashtag3"],
-  "mid_tier": ["hashtag1","hashtag2","hashtag3","hashtag4","hashtag5","hashtag6"],
-  "niche": ["hashtag1","hashtag2","hashtag3","hashtag4"],
-  "total_count": 15,
-  "estimated_reach": "50K-150K",
-  "competition_level": "Medium",
-  "strategy_notes": "2-3 sentence explanation of why these hashtags were chosen and how to use them effectively for this platform."
-}}
+  "branded": ["#brand1", "#brand2"],
+  "high_volume": ["#tag1", "#tag2", "#tag3"],
+  "mid_tier": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"],
+  "niche": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"],
+  "strategy_notes": "Brief explanation of the strategy"
+}}"""
 
-Rules:
-- Each hashtag must start with #
-- No spaces in hashtags
-- branded: 1-3 unique brand/campaign tags
-- high_volume: 2-3 broad tags with 1M+ posts
-- mid_tier: 5-8 tags with 50K-1M posts (sweet spot)
-- niche: 3-5 highly specific tags under 50K posts
-- All must be directly relevant to the content"""
+        data = json.dumps({
+            "contents": [{"parts": [{"text": prompt}]}]
+        }).encode()
 
-            payload = json.dumps({
-                "model": "claude-sonnet-4-20250514",
-                "max_tokens": 1000,
-                "messages": [{"role": "user", "content": prompt}]
-            }).encode("utf-8")
+        req = urllib.request.Request(
+            f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}",
+            data=data,
+            headers={"Content-Type": "application/json"},
+            method="POST"
+        )
 
-            req = urllib.request.Request(
-                "https://api.anthropic.com/v1/messages",
-                data=payload,
-                headers={
-                    "Content-Type": "application/json",
-                    "x-api-key": api_key,
-                    "anthropic-version": "2023-06-01"
-                },
-                method="POST"
-            )
+        with urllib.request.urlopen(req) as res:
+            result = json.loads(res.read())
+            text = result["candidates"][0]["content"]["parts"][0]["text"]
+            text = text.replace("```json", "").replace("```", "").strip()
+            parsed = json.loads(text)
 
-            with urllib.request.urlopen(req, timeout=30) as resp:
-                resp_data = json.loads(resp.read())
-                text = resp_data["content"][0]["text"]
-                clean = text.replace("```json", "").replace("```", "").strip()
-                result = json.loads(clean)
-                self._send_json(result)
+        return Response(json.dumps(parsed), headers={
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+        })
 
-        except urllib.error.HTTPError as e:
-            error_body = e.read().decode()
-            self._send_json({"error": f"Anthropic API error: {error_body}"}, 502)
-        except json.JSONDecodeError as e:
-            self._send_json({"error": f"JSON parse error: {str(e)}"}, 500)
-        except Exception as e:
-            self._send_json({"error": str(e)}, 500)
-
-    def _send_json(self, data, status=200):
-        self.send_response(status)
-        self._set_cors_headers()
-        self.send_header("Content-Type", "application/json")
-        self.end_headers()
-        self.wfile.write(json.dumps(data).encode("utf-8"))
-
-    def _set_cors_headers(self):
-        self.send_header("Access-Control-Allow-Origin", "*")
-        self.send_header("Access-Control-Allow-Methods", "POST, OPTIONS")
-        self.send_header("Access-Control-Allow-Headers", "Content-Type")
-
-    def log_message(self, format, *args):
-        pass
+    except Exception as e:
+        return Response(json.dumps({"error": str(e)}), status=500, headers={
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+        })
